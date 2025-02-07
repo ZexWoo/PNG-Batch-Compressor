@@ -1,8 +1,8 @@
 # PNG-Batch-Compressor
 
-能够自定义参数的 PNG 批量压缩器。
+能够自定义参数的 PNG 批量压缩器。[点此](https://github.com/ZexWoo/PNG-Batch-Compressor/blob/main/PNG-Batch-Compressor.py) 下载 Python 脚本，注意该脚本采用 GPL-3.0 开源协议。
 
-**前言：这是我的习作，如有不足，请见谅。**
+**温馨提示：这是我的习作，如有不足，请见谅。**
 
 ## 用法
 
