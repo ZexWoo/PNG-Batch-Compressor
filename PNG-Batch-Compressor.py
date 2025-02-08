@@ -1,4 +1,5 @@
 import os
+import time
 
 def findext(dir, exts):
     """输入目录和所需拓展名，返回目录和子目录中所有符合条件的文件名列表。"""
@@ -81,11 +82,13 @@ def param_selector():
 if __name__ == '__main__':
     # 获取当前目录
     current_path = os.getcwd()
+
     # 确认输入目录是否存在，如不存在，则创建
     input_path = current_path + '\\Input'
     if not os.path.exists(input_path):
         os.mkdir('./Input')
         print("「Input」文件夹不存在，已帮你创建好！")
+
     # 确认输出目录是否存在，如不存在，则创建
     output_path = current_path + '\\Output'
     if not os.path.exists(output_path):
@@ -94,20 +97,32 @@ if __name__ == '__main__':
 
     # 支持的输入文件扩展名
     exts = ['.png', '.PNG']
+
     # 获得待处理的文件列表
     files = findext(input_path, exts)
+
     if files:
         param = param_selector()
 
+        total_start = time.time()
+
         for path in files:
+            # 获取输出文件名
+            dirStr, ext = os.path.splitext(path)
+            png_name = dirStr.split('\\')[-1]
+
             # 调用 oxipng
             if param:
                 command = f"oxipng {param} --dir=\"{output_path}\\{param}\" \"{path}\""
             else:
                 command = f"oxipng {param} --dir=\"{output_path}\\default param\" \"{path}\""
             print(f"使用的命令为：\n\n{command}\n")
+            start = time.time()
             os.system(command)
-            print(f"\n当前进度：{files.index(path) + 1}/{len(files)}\n{'-' * 30}")
-        print("所有压缩任务已完成！")
+            end = time.time()
+            print(f"\n共 {len(files)} 张，已完成第 {files.index(path) + 1} 张「{png_name}」，耗时约 {round((end - start), 1)} 秒。\n{'-' * 30}")
+
+        total_end = time.time()
+        print(f"所有压缩任务已完成！总耗时约 {round((total_end - total_start), 1)} 秒。")
     else:
         print("待压缩 PNG 目录为空！请将需要压缩的 PNG 都存放到 Input 文件夹中！")
