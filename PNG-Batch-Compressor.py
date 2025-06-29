@@ -45,7 +45,7 @@ def interlacing_selector():
         case "1":
             interlacing = '-i 1 '
         case _:
-            interlacing = '-i keep'
+            interlacing = '-i keep '
     return interlacing
 
 def strip_selector():
